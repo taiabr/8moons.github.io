@@ -1,0 +1,32 @@
+html,body,h1,h2,h3,h4 {
+	font-family: "Inconsolata", sans-serif !important
+}
+
+html {
+	background-image: url("images/background1.jpg");
+}
+
+body{
+	background-color: transparent;
+}
+
+.invisible{
+	opacity: 0;
+}
+
+.w3-sidebar a {
+	font-family: "Roboto", sans-serif
+}
+h5,h6,.w3-wide 
+	{font-family: "Montserrat", sans-serif;
+}
+.back-img2 {
+	background-image: url("images/background2.jpg");
+}
+.back-img3 {
+	background-image: url("images/background3.jpg");
+}
+
+.my-sidebar {
+	background-color: black;
+}
