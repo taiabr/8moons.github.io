@@ -7,7 +7,7 @@ $(document).ready( function() {
 			// x.className += " w3-show";
 		// } else {
 			// x.className = x.className.replace(" w3-show", "");
-		// }
+		// } 
 	// }
 
 	// Click on the "Jeans" link on page load to open the accordion for demo purposes
@@ -32,7 +32,7 @@ $(document).ready( function() {
 	$('.closeMenu').click( function(){
 		closeMenu();
 	});
-	
+	/*
 	function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
@@ -40,6 +40,6 @@ $(document).ready( function() {
 	  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.9";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
-
+	*/
 	
 });
