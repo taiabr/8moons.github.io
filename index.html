@@ -1,350 +1,238 @@
 <!DOCTYPE html>
 <html>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
-<link rel="stylesheet" type="text/css" href="stylesheet.css" />
-<title>8Moons Bazaar</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- TEMPLATE -->
+<!-- https://v4-alpha.getbootstrap.com/examples/dashboard/# -->
+<head>
+	<!-- Renderização adequada / zoom pelo toque -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-<script src="script.js" type="text/javascript"></script>
+	<!-- Bootstrap core CSS -->
+	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
+	<!-- Estilos -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+	<link rel="stylesheet" type="text/css" href="stylesheet.css" />
 
-<body class="w3-content" style="max-width:1200px ">
-	<div id="fb-root"></div>					
-	<script>
-	</script>
-	
-	<!-- Sidebar/menu -->
-	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-	  <div class="w3-container w3-display-container w3-padding-16">
-		<i class="fa fa-remove w3-hide-large w3-button w3-display-topright closeMenu"></i>
-			<img src="images/logo-compact.png" class='square' style="width:100%" >
-	  </div>
-	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-		<a href="#" class="w3-bar-item w3-button">Tudo</a>
-		<a href="#areaBlusas" class="w3-bar-item w3-button">Blusas</a>
-		<a href="#areaVestidos" class="w3-bar-item w3-button">Vestidos</a>
-		<a href="#areaSaias" class="w3-bar-item w3-button">Saias</a>
-	  </div>
-	  <a href="#footer" class="w3-bar-item w3-button w3-padding">Informações</a> 
-	  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display='block'">		E-mail
-	  </a> 
-	</nav>
-
-	<!-- Top menu on small screens -->
-	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge" style="height:75px">
-		<img src="images/logo-compact.png" style="height: 75px">
-		<a class="w3-bar-item w3-button w3-padding-24 w3-right w3-middle openMenu" onclick='openMenu();'><i class="fa fa-bars"></i></a>
-	</header>
-
-	<!-- Overlay effect when opening sidebar on small screens -->
-	<div class="w3-overlay w3-hide-large closeMenu" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-	<!-- !PAGE CONTENT! -->
-	<div class="w3-main w3-center " style="margin-left:250px">
-
-		<!-- Push down content on small screens -->
-		<div class="w3-hide-large" style="margin-top:83px"></div>
-		
-		<!-- Top header -->
-		<header class="w3-container w3-xlarge">
-			<!-- <h1 class="w3-center">8Moons Bazar</h1> -->
-			<p class="w3-right">
-				<i class="fa fa-shopping-cart w3-margin-right"></i>
-				<i class="fa fa-search"></i>
-			</p>
-		</header>
-
-		<div class="w3-container w3-text-grey w3-left" id="jeans">	
-			<p>8 items</p>
-		</div>
-
-		<!-- Product grid -->
-		<!-- <div class=""> -->
-
-			<!-- <div class="" id='areaBlusas'> -->
-				<!-- <div class="gallery"> -->
-					<!-- <div class=""> -->
-						<!-- <a target="_blank" href="images/bluda-trico.jpg"> -->
-							<!-- <img src="images/bluda-trico.jpg" style="width:100%"> -->
-						<!-- </a> -->
-						<!-- <span class="w3-tag w3-display-topleft">Novo</span> -->
-					<!-- </div> -->
-					<!-- <div class="desc"> -->
-						<!-- <p>Blusa de tricô -->
-							<!-- <br><b>R$30.00</b> -->
-							<!-- <br>Tamanho único -->
-							<!-- <br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button> -->
-						<!-- </p> -->
-					<!-- </div> -->
-				<!-- </div> -->
-			<!-- </div> -->
-			<!-- <div class="" id='areaSaias'> -->
-				<!-- <div class="gallery"> -->
-					<!-- <div class=""> -->
-						<!-- <a target="_blank" href="images/saia-longa.jpg"> -->
-							<!-- <img src="images/saia-longa.jpg" style="width:100%"> -->
-						<!-- </a> -->
-						<!-- <span class="w3-tag w3-display-topleft">Novo</span> -->
-					<!-- </div> -->
-					<!-- <p>Saia Longa com Cinto -->
-						<!-- <br><b>R$25.00</b> -->
-						<!-- <br>Tamanho M -->
-						<!-- <br><button class="w3-button"><i class="fa fa-shopping-cart"></i> -->
-					<!-- </p> -->
-				<!-- </div> -->
-			<!-- </div> -->
-			<!-- <div class="" id='areaVestidos'> -->
-				<!-- <div class="gallery"> -->
-					<!-- <div class=""> -->
-						<!-- <a target="_blank" href="images/vestido-moleton.jpg"> -->
-							<!-- <img src="images/vestido-moleton.jpg" style="width:100%"> -->
-						<!-- </a> -->
-						<!-- <span class="w3-tag w3-display-topleft">Novo</span> -->
-					<!-- </div> -->
-					<!-- <p>Vestido de Moleton 3 em 1 -->
-						<!-- <br><b>R$60.00</b> -->
-						<!-- <br>Tamanho M -->
-						<!-- <br><button class="w3-button"><i class="fa fa-shopping-cart"></i> -->
-					<!-- </p> -->
-				<!-- </div> -->
-			<!-- </div> -->
-		<!-- </div> -->
+	<!-- Titulo da pagina -->
+	<title>8Moons Bazaar</title>
+</head>
 
 
 
+<body class='bodyBackground'>
 
+	<div class="container-fluid fixed-top">
 
-
-
-
-		<!-- Product grid -->
-		<div class="w3-row w3-grayscale w3-center divGrid">
-
-			<div class="w3-col l3 s6 divGrid-shirt" id='areaBlusas'>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/bluda-trico.jpg">
-							<img src="images/bluda-trico.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Blusa de tricô
-						<br><b>R$30.00</b>
-						<br>Tamanho único
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i></button>
-					</p>
-				</div>
-			</div>
-			<div class="w3-col l3 s6 divGrid-skirt" id='areaSaias'>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/saia-longa.jpg">
-							<img src="images/saia-longa.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Saia Longa com Cinto
-						<br><b>R$25.00</b>
-						<br>Tamanho M
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i>
-					</p>
-				</div>
-			</div>
-			<div class="w3-col l3 s6 divGrid-dress" id='areaVestidos'>
-				<div class="w3-container gallery">
-					<div class="w3-display-container">
-						<a target="_blank" href="images/vestido-moleton.jpg">
-							<img src="images/vestido-moleton.jpg" style="width:100%">
-						</a>
-						<span class="w3-tag w3-display-topleft">Novo</span>
-					</div>
-					<p>Vestido de Moleton 3 em 1
-						<br><b>R$60.00</b>
-						<br>Tamanho M
-						<br><button class="w3-button"><i class="fa fa-shopping-cart"></i>
-					</p>
-				</div>
-			</div>
-		</div>
-
-		<!-- Footer -->
-		<footer class="w3-padding-64 w3-light-grey w3-small w3-center w3-bottom" id="footer">
-		<!-- style="overflow:hidden"> -->
+		<!-- BARRA DE MANU DESKTOP -->
+		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">
+			<!-- LOGO -->
+			<img class='img-fluid rounded-circle' src="images/logo-compact.png">
+			<div><br></div>	<!-- Espaco -->
 			
-			<div class="w3-row-padding">
-
-				<div class="w3-col s4 w3-left">
-					<h4>Sobre</h4>
-					<div class="fb-page" data-href="https://www.facebook.com/8moonsbazaar/" data-tabs="timeline" data-width="350" data-height="250" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-						<blockquote cite="https://www.facebook.com/8moonsbazaar/" class="fb-xfbml-parse-ignore">
-							<a href="https://www.facebook.com/8moonsbazaar/">8Moons Bazaar</a>
-						</blockquote>
-					</div>
+			<!-- Opcoes do menu -->
+			<ul class="nav nav-pills flex-column ">
+				<!-- <li class="nav-item "> -->
+					<!-- <a class="nav-link" href="#tudo">Tudo</a> -->
+				<!-- </li> -->
+				<li class="nav-item ">
+					<a class="nav-link" href="#blusas">Blusas</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="#saias">Saias</a>
+				</li>
+				<li class="nav-item ">
+					<a class="nav-link" href="#vestidos">Vestidos</a>
+				</li>
+				<div class="atBottom">
+					<li class="nav-item myItem">
+						<a class="nav-link" href="#footerInfo">Informações</a>
+					</li>
+					<li class="nav-item myItem">
+						<a class="nav-link" href="javascript:void(0)" onclick="onAction('sendMail')">E-mail</a>
+					</li>
 				</div>
+			</ul>
+		</nav>
+		
+		<!-- BARRA DE MANU MOBILE -->
+		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top hidden-sm-up sidebarColor">
+		  <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">8Moons Bazaar</a>
 
-				<div class="w3-col s4 w3-justify">
-					<h4>Contato</h4>
-					<p><i class="fa fa-fw fa-phone"></i> +55 (24) xxxxx-xxxx</p>
-					<p><i class="fa fa-fw fa-envelope"></i>contato.8moons@hotmail.com</p>
-					<p><i class="fa fa-fw fa-cc-paypal"></i> Aceitamos PayPal</p>
+		  <div class="collapse navbar-collapse" id="navbarsExampleDefault">						
+			<!-- Opcoes do menu -->
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active ">
+					<a class="nav-link" href="#blusas">Blusas</a>
+				</li>
+				<li class="nav-item active ">
+					<a class="nav-link" href="#saias">Saias</a>
+				</li>
+				<li class="nav-item active ">
+					<a class="nav-link" href="#vestidos">Vestidos</a>
+				</li>
+			</ul>
+			<br>
+			<ul class="nav navbar-nav mr-auto">
+				<li class="nav-item active myItem">
+					<a class="nav-link" href="#footerInfo">Informações</a>
+				</li>
+				<li class="nav-item active myItem">
+					<a class="nav-link" href="" onclick="onAction('sendMail')">E-mail</a>
+				</li>
+			</ul>
+		  </div>
+		</nav>
+
+		<div class="row">
+
+			<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myMain"  id='tudo'>
+		
+				<div class='spaceForMenu hidden-sm-up'>
 				</div>
-			</div>
-		</footer>
-
-		<!-- End page content -->
-	</div>
-
-	<!-- Newsletter Modal -->
-	<div id="newsletter" class="w3-modal">
-		<div class="w3-modal-content w3-animate-zoom" style="padding:32px">
-			<div class="w3-container w3-white w3-center">
-				<i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
 				
-				<!-- <div class="w3-col s4"> -->
-					<h2>E-mail</h2>
-					<form action="javascript:sendMail();" target="_blank">
-						<p>
-							<input class="w3-input w3-border" type="text" placeholder="Nome" name="Nome" required>
-						</p>
-						<p>
-							<input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required>
-						</p>
-						<p>
-							<input class="w3-input w3-border" type="text" placeholder="Assunto" name="Assunto" required>
-						</p>
-						<p>
-							<input class="w3-input w3-border" type="text" placeholder="Mensagem" name="Mensagem" required>
-						</p>
-						<button type="submit" class="w3-button w3-block w3-black" id='btnSend'>Enviar</button>
-					</form>
-				<!-- </div> -->
-			</div>
+				<h3 class='sectionTitle' id='blusas'>Blusas</h3>
+				<section class="row text-center placeholders mySection">
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/bluda-trico.jpg" class='prodImg'>
+							<img src="images/bluda-trico.jpg" width="200" height="200" class="img-fluid prodImg" alt="Generic placeholder thumbnail">
+						</a>
+						<div>
+							<h6>Blusa de tricô</h6>
+							<p><b>R$30.00</b>
+							<p class='mySize'>Tamanho Único</p>
+							</p>
+						</div>
+					</div>
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/bluda-trico.jpg">
+							<img src="images/bluda-trico.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Blusa de tricô</h6>
+							<p><b>R$30.00</b>
+							<p class='mySize'>Tamanho Único</p>
+							</p>
+						</div>
+					</div>
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/bluda-trico.jpg">
+							<img src="images/bluda-trico.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Blusa de tricô</h6>
+							<p><b>R$30.00</b>
+							<p class='mySize'>Tamanho Único</p>
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<h3  class='sectionTitle' id='saias'>Saias</h3>
+				<section class="row text-center placeholder mySection">
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/saia-longa.jpg">
+							<img src="images/saia-longa.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Saia Longa com Cinto</h6>
+							<p><b>R$25.00</b>
+							<p class='mySize'>Tamanho M</p>
+							</p>
+						</div>
+					</div>
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/saia-longa.jpg">
+							<img src="images/saia-longa.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Saia Longa com Cinto</h6>
+							<p><b>R$25.00</b>
+							<p class='mySize'>Tamanho M</p>
+							</p>
+						</div>
+					</div>
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/saia-longa.jpg">
+							<img src="images/saia-longa.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Saia Longa com Cinto</h6>
+							<p><b>R$25.00</b>
+							<p class='mySize'>Tamanho M</p>
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<h3  class='sectionTitle' id='vestidos'>Vestidos</h3>
+				<section class="row text-center placeholders mySection">
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/vestido-moleton.jpg">
+							<img src="images/vestido-moleton.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Vestido de Moleton 3 em 1</h6>
+							<p><b>R$60.00</b>
+							<p class='mySize'>Tamanho M</p>
+							</p>
+						</div>
+					</div>
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/vestido-moleton.jpg">
+							<img src="images/vestido-moleton.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Vestido de Moleton 3 em 1</h6>
+							<p><b>R$60.00</b>
+							<p class='mySize'>Tamanho M</p>
+							</p>
+						</div>
+					</div>
+					<div class="col-6 col-sm-3 placeholder myProduct">
+						<a target="_blank" href="images/vestido-moleton.jpg">
+							<img src="images/vestido-moleton.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
+						</a>
+						<div class='myDesc'>
+							<h6>Vestido de Moleton 3 em 1</h6>
+							<p><b>R$60.00</b>
+							<p class='mySize'>Tamanho M</p>
+							</p>
+						</div>
+					</div>
+				</section>
+				
+				<footer class=' myFooter sidebarColor' id='footerInfo'>
+					<!-- <div class=''> -->
+						<div class='myInfo'>
+							<h5>Informações para contato:</h5>
+						</div>
+						<ul class='nav nav-pills flex-column'>
+							<li class='nav-item'>
+								<p>E-mail: <a href="mailto:someone@example.com" class='mailLink'>contato.8moons@hotmail.com</a></p>
+							</li>
+							<li class='nav-item'>
+								<p>Telefone: ( XX ) XXXX-XXXX</p>
+							</li>
+						</ul>
+					<!-- </div> -->
+				</footer>
+
+			</main>
 		</div>
 	</div>
+
+	<!-- JavaScript for Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>	
+	<script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+		
+	<!-- My Scripts -->
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+	<script src="script.js" type="text/javascript"></script>
+
 </body>
 
 </html>
