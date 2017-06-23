@@ -3,12 +3,14 @@
 
 <!-- TEMPLATE -->
 <!-- https://v4-alpha.getbootstrap.com/examples/dashboard/# -->
+
 <head>
 	<!-- Renderização adequada / zoom pelo toque -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Bootstrap core CSS -->
+	<!-- Bootstrap CSS -->
 	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Estilos -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
@@ -27,14 +29,16 @@
 		<!-- BARRA DE MANU DESKTOP -->
 		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">
 			<!-- LOGO -->
-			<img class='img-fluid rounded-circle' src="images/logo-compact.png">
-			<div><br></div>	<!-- Espaco -->
-			
+			<a target="_blank" href="images/logo.png" class=''>
+				<img class='img-fluid rounded-circle' src="images/logo-compact.png">
+			</a>
+			<div>
+				<br>
+			</div>
+			<!-- Espaco -->
+
 			<!-- Opcoes do menu -->
 			<ul class="nav nav-pills flex-column ">
-				<!-- <li class="nav-item "> -->
-					<!-- <a class="nav-link" href="#tudo">Tudo</a> -->
-				<!-- </li> -->
 				<li class="nav-item ">
 					<a class="nav-link" href="#blusas">Blusas</a>
 				</li>
@@ -48,54 +52,55 @@
 					<li class="nav-item myItem">
 						<a class="nav-link" href="#footerInfo">Informações</a>
 					</li>
-					<!-- <li class="nav-item myItem">
-						<a class="nav-link" href="javascript:void(0)" onclick="onAction('sendMail')">E-mail</a>
-					</li> -->
+					<!-- <li class="nav-item myItem"> -->
+						<!-- <a class="nav-link" href="javascript:void(0)" onclick="onAction('sendMail')">E-mail</a> -->
+					<!-- </li> -->
 				</div>
 			</ul>
 		</nav>
-		
-		<!-- BARRA DE MANU MOBILE -->
-		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top hidden-sm-up sidebarColor">
-		  <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		  </button>
-		  <a class="navbar-brand" href="#">8Moons Bazaar</a>
 
-		  <div class="collapse navbar-collapse" id="navbarsExampleDefault">						
-			<!-- Opcoes do menu -->
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active ">
-					<a class="nav-link" href="#blusas">Blusas</a>
-				</li>
-				<li class="nav-item active ">
-					<a class="nav-link" href="#saias">Saias</a>
-				</li>
-				<li class="nav-item active ">
-					<a class="nav-link" href="#vestidos">Vestidos</a>
-				</li>
-			</ul>
-			<br>
-			<ul class="nav navbar-nav mr-auto">
-				<li class="nav-item active myItem">
-					<a class="nav-link" href="#footerInfo">Informações</a>
-				</li>
-				<!-- <li class="nav-item active myItem">
-					<a class="nav-link" href="" onclick="onAction('sendMail')">E-mail</a>
-				</li> -->
-			</ul>
-		  </div>
+		<!-- BARRA DE MANU MOBILE -->
+		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top hidden-sm-up sidebarColor miniMenu">
+			<button class="navbar-toggler navbar-toggler-right hidden-lg-up miniMenuButton" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand miniMenuTitle" href="images/logo.png">
+				8Moons Bazaar
+			</a>
+
+			<div class="collapse navbar-collapse miniMenuOptions" id="navbarsExampleDefault">
+				<!-- Opcoes do menu -->
+				<ul class="navbar-nav mr-auto miniMenuUl">
+					<li class="nav-item active miniMenuLi">
+						<a class="nav-link miniMenuOption" href="#blusas">Blusas</a>
+					</li>
+					<li class="nav-item active miniMenuLi">
+						<a class="nav-link miniMenuOption" href="#saias">Saias</a>
+					</li>
+					<li class="nav-item active miniMenuLi">
+						<a class="nav-link miniMenuOption" style='' href="#vestidos">Vestidos</a>
+					</li>
+					<br>
+					<br>
+					<li class="nav-item active miniMenuLi myItem">
+						<a class="nav-link miniMenuOption" href="#footerInfo">Informações</a>
+					</li>
+					<!-- <li class="nav-item active miniMenuLi myItem"> -->
+						<!-- <a class="nav-link miniMenuOption" href="" onclick="onAction('sendMail')">E-mail</a> -->
+					<!-- </li> -->
+				</ul>
+			</div>
 		</nav>
 
 		<div class="row">
 
-			<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myMain"  id='tudo'>
-		
+			<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myMain" id='tudo'>
+
 				<div class='spaceForMenu hidden-sm-up'>
 				</div>
-				
+
 				<h3 class='sectionTitle' id='blusas'>Blusas</h3>
-				<section class="row text-center placeholders mySection">
+				<section class="row text-center placeholders mySection" style='border-bottom: 1px solid #eee;'>
 					<div class="col-6 col-sm-3 placeholder myProduct">
 						<a target="_blank" href="images/bluda-trico.jpg" class='prodImg'>
 							<img src="images/bluda-trico.jpg" width="200" height="200" class="img-fluid prodImg" alt="Generic placeholder thumbnail">
@@ -103,7 +108,7 @@
 						<div>
 							<h6>Blusa de tricô</h6>
 							<p><b>R$30.00</b>
-							<p class='mySize'>Tamanho Único</p>
+								<p class='mySize'>Tamanho Único</p>
 							</p>
 						</div>
 					</div>
@@ -114,7 +119,7 @@
 						<div class='myDesc'>
 							<h6>Blusa de tricô</h6>
 							<p><b>R$30.00</b>
-							<p class='mySize'>Tamanho Único</p>
+								<p class='mySize'>Tamanho Único</p>
 							</p>
 						</div>
 					</div>
@@ -125,14 +130,14 @@
 						<div class='myDesc'>
 							<h6>Blusa de tricô</h6>
 							<p><b>R$30.00</b>
-							<p class='mySize'>Tamanho Único</p>
+								<p class='mySize'>Tamanho Único</p>
 							</p>
 						</div>
 					</div>
 				</section>
 
-				<h3  class='sectionTitle' id='saias'>Saias</h3>
-				<section class="row text-center placeholder mySection">
+				<h3 class='sectionTitle' id='saias'>Saias</h3>
+				<section class="row text-center placeholder mySection" style='border-bottom: 1px solid #eee;'>
 					<div class="col-6 col-sm-3 placeholder myProduct">
 						<a target="_blank" href="images/saia-longa.jpg">
 							<img src="images/saia-longa.jpg" width="200" height="200" class="img-fluid" alt="Generic placeholder thumbnail">
@@ -140,7 +145,7 @@
 						<div class='myDesc'>
 							<h6>Saia Longa com Cinto</h6>
 							<p><b>R$25.00</b>
-							<p class='mySize'>Tamanho M</p>
+								<p class='mySize'>Tamanho M</p>
 							</p>
 						</div>
 					</div>
@@ -151,7 +156,7 @@
 						<div class='myDesc'>
 							<h6>Saia Longa com Cinto</h6>
 							<p><b>R$25.00</b>
-							<p class='mySize'>Tamanho M</p>
+								<p class='mySize'>Tamanho M</p>
 							</p>
 						</div>
 					</div>
@@ -162,13 +167,13 @@
 						<div class='myDesc'>
 							<h6>Saia Longa com Cinto</h6>
 							<p><b>R$25.00</b>
-							<p class='mySize'>Tamanho M</p>
+								<p class='mySize'>Tamanho M</p>
 							</p>
 						</div>
 					</div>
 				</section>
 
-				<h3  class='sectionTitle' id='vestidos'>Vestidos</h3>
+				<h3 class='sectionTitle' id='vestidos'>Vestidos</h3>
 				<section class="row text-center placeholders mySection">
 					<div class="col-6 col-sm-3 placeholder myProduct">
 						<a target="_blank" href="images/vestido-moleton.jpg">
@@ -177,7 +182,7 @@
 						<div class='myDesc'>
 							<h6>Vestido de Moleton 3 em 1</h6>
 							<p><b>R$60.00</b>
-							<p class='mySize'>Tamanho M</p>
+								<p class='mySize'>Tamanho M</p>
 							</p>
 						</div>
 					</div>
@@ -188,7 +193,7 @@
 						<div class='myDesc'>
 							<h6>Vestido de Moleton 3 em 1</h6>
 							<p><b>R$60.00</b>
-							<p class='mySize'>Tamanho M</p>
+								<p class='mySize'>Tamanho M</p>
 							</p>
 						</div>
 					</div>
@@ -199,26 +204,46 @@
 						<div class='myDesc'>
 							<h6>Vestido de Moleton 3 em 1</h6>
 							<p><b>R$60.00</b>
-							<p class='mySize'>Tamanho M</p>
+								<p class='mySize'>Tamanho M</p>
 							</p>
 						</div>
 					</div>
 				</section>
-				
+
 				<footer class=' myFooter sidebarColor' id='footerInfo'>
-					<!-- <div class=''> -->
-						<div class='myInfo'>
-							<h5>Informações para contato:</h5>
-						</div>
-						<ul class='nav nav-pills flex-column'>
-							<li class='nav-item'>
-								<p>E-mail: <a href="mailto:someone@example.com" class='mailLink'>contato.8moons@hotmail.com</a></p>
-							</li>
-							<li class='nav-item'>
-								<p>Telefone: ( XX ) XXXX-XXXX</p>
-							</li>
-						</ul>
-					<!-- </div> -->
+					<div class='contactTitleDiv'>
+						<h5>
+							<span class="glyphicon glyphicon-info-sign"></span>
+							<b class='contactTitle'>Informações para contato:</b>
+						</h5>
+					</div>
+					<div class='hrDivClass'>
+						<hr>
+					</div>					
+					<ul class='nav nav-pills flex-column contactOptions'>
+						<li class='nav-item' style='margin-top:2%'>
+							<p>
+								<span class="glyphicon glyphicon-user"></span> E-mail: <a href="mailto:someone@example.com" class='mailLink'>contato.8moons@hotmail.com</a>
+							</p>
+						</li>
+						<li class='nav-item'>
+							<p>
+								<span class="glyphicon glyphicon-earphone"></span> Telefone: ( XX ) XXXX-XXXX
+							</p>
+						</li>
+						<li class='nav-item'>
+							<p>
+								<span class="glyphicon glyphicon-thumbs-up"></span> Curta nossa página no
+								<a target="_blank" href="https://fb.me/8moonsbazaar" class=''>Facebook</a>
+							</p>
+						</li>
+						<li class='nav-item'>
+							<p>
+								<span class="glyphicon glyphicon-heart-empty"></span> Siga-nos no Instagram: @8moonsbazaar
+								<!-- <a target="_blank" href="" class=''></a> -->
+							</p>
+						</li>
+					</ul>
 				</footer>
 
 			</main>
@@ -226,11 +251,15 @@
 	</div>
 
 	<!-- JavaScript for Bootstrap -->
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>	
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 	<script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
-		
+
+	<!-- Icons for Bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
 	<!-- My Scripts -->
-	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="script.js" type="text/javascript"></script>
 
 </body>
