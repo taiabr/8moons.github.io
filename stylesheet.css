@@ -376,3 +376,11 @@ h1 {
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 }
+.spanImg{
+	float: right;
+	position: relative;
+	margin-left: 15%;
+	color: black;
+	width: 50px !important;
+    height: 24px !important;
+}
