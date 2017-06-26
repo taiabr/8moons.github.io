@@ -203,16 +203,13 @@ h1 {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
-    /* Scrollable contents if viewport is shorter than content. */
-    
-    border-right: 1px solid #eee;
+    /* Scrollable contents if viewport is shorter than content. */    
+    border-right: 1.5px solid #eee;
     height: 100%;
     font-size: 14px;
-    /* background-color: #b22222; */
-    /* color: white;	 */
 }
 .sidebarColor {
-    background-color: #b22222 !important;
+    background-color: black !important;
     color: white !important;
 }
 /* Sidebar navigation */
@@ -239,7 +236,7 @@ h1 {
 }
 .sidebar .nav-link:hover {
     border-radius: 0;
-    background-color: #e2725b !important;
+    background-color: #808080 !important;
     font-weight: bold;
     border-radius: 10px;
 }
@@ -273,21 +270,18 @@ h1 {
     display: flex;
     justify-content: space-between;
 }
-.bodyBackground {
-    /* background-image: url("images/background1.jpg"); */
-    /* background-size: cover; */
-    /* background-position: center no-repeat; */
-    
-    background-color: #ecdbb6;
+.bodyBackground {    
+    background-color: white;
+	color: black;
 }
 .myProduct:hover {
-    background-color: #dcc5af;
+    background-color: #DCDCDC;
     border-radius: 20px;
 }
 .sectionTitle {
     text-align: center;
-    background-color: #e2725b !important;
-	color: white;
+    background-color: #DCDCDC !important;
+	color: black;
     border-radius: 10px;	
 	margin-left: 30%;
 	margin-right: 30%;
@@ -297,11 +291,13 @@ h1 {
 }
 .atBottom {
     position: absolute;
+    /* position: bottom; */
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 1000;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+	margin-top: 50%;
 }
 .spaceForMenu {
     height: 7%;
@@ -383,4 +379,45 @@ h1 {
 	color: black;
 	width: 50px !important;
     height: 24px !important;
+	margin: 0;
+}
+.barButtons {
+	display: inline;
+    float: right;
+    margin: 0 2% 5% 0;
+	position: fixed;
+	background-color: transparent;	
+	z-index: 99999;
+}
+.checkOutButton{
+	color: white;
+	background-color: gray;
+	border: none;
+	border: none;
+	border-radius: 10px;
+	font-size: 20px;
+	margin-top: 5px;
+    float: right;
+}
+.addButton{
+	background-color: transparent;		
+	color: black;
+	display: inline-flex;
+	border: none;
+	margin: 0 0 0 10%;
+}
+.cartSpan{
+	width: 30px;
+	height: 25px;
+}
+
+/* TELA DE EXIBICAO DO CARRINHO */
+#kartScreen{
+	background-color: black;
+	color: white;
+	margin: auto;
+	width: 500px;
+	height: 500px;
+	top: 15px;
+	z-index: 99999999999999999;
 }

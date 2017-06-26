@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 
-<!-- TEMPLATE -->
+<!-- TEMPLATES -->
 <!-- https://v4-alpha.getbootstrap.com/examples/dashboard/# -->
+<!-- https://www.w3schools.com/w3css/tryw3css_templates_clothing_store.htm# -->
 
 <head>
 	<!-- Renderização adequada / zoom pelo toque -->
@@ -25,9 +26,9 @@
 <body class='bodyBackground'>
 
 	<div class="container-fluid fixed-top">
-
+	
 		<!-- BARRA DE MANU DESKTOP -->
-		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">
+		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">		
 			<!-- LOGO -->
 			<a target="_blank" href="images/logo.png" class=''>
 				<img class='img-fluid rounded-circle' src="images/logo-compact.png">
@@ -48,14 +49,10 @@
 				<li class="nav-item ">
 					<a class="nav-link" href="#vestidos">Vestidos</a>
 				</li>
-				<div class="atBottom">
-					<li class="nav-item myItem">
-						<a class="nav-link" href="#footerInfo">Informações</a>
-					</li>
-					<!-- <li class="nav-item myItem"> -->
-						<!-- <a class="nav-link" href="javascript:void(0)" onclick="onAction('sendMail')">E-mail</a> -->
-					<!-- </li> -->
-				</div>
+				<br>
+				<li class="nav-item myItem atBottom">
+					<a class="nav-link" href="#footerInfo">Informações</a>
+				</li>
 			</ul>
 		</nav>
 
@@ -66,7 +63,15 @@
 			</button>
 			<a class="navbar-brand miniMenuTitle" href="images/logo.png">
 				8Moons Bazaar
-			</a>
+			</a>			
+			
+			<!-- Botao de visualizacao do carrinho - Mobile -->
+			<div class="navbar-toggler-right hidden-lg-up miniMenuButton barButtons" id='showKart'>
+				<!-- <button class="checkOutButton" type="button" onclick='showKart();'> -->
+					<!-- <b style='font-size:15px'>Ver Carrinho</b> -->
+					<!-- <span class="glyphicon glyphicon-shopping-cart cartSpan"></span> -->
+				<!-- </button> -->
+			</div>
 
 			<div class="collapse navbar-collapse miniMenuOptions" id="navbarsExampleDefault">
 				<!-- Opcoes do menu -->
@@ -85,9 +90,6 @@
 					<li class="nav-item active miniMenuLi myItem">
 						<a class="nav-link miniMenuOption" href="#footerInfo">Informações</a>
 					</li>
-					<!-- <li class="nav-item active miniMenuLi myItem"> -->
-						<!-- <a class="nav-link miniMenuOption" href="" onclick="onAction('sendMail')">E-mail</a> -->
-					<!-- </li> -->
 				</ul>
 			</div>
 		</nav>
@@ -111,13 +113,13 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$30.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Blusa de tricô', 30, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Blusa de tricô', 30, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
-						</div>
-						
+						</div>						
 					</div>
 					<div class="col-6 col-sm-3 placeholder myProduct">
 						<a target="_blank" href="images/bluda-trico.jpg">
@@ -129,9 +131,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$30.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Blusa de tricô', 30, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Blusa de tricô', 30, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -146,9 +149,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$30.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Blusa de tricô', 30, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Blusa de tricô', 30, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -167,9 +171,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$25.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Saia Longa com Cinto', 25, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Saia Longa com Cinto', 25, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -184,9 +189,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$25.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Saia Longa com Cinto', 25, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Saia Longa com Cinto', 25, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -201,9 +207,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$25.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Saia Longa com Cinto', 25, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Saia Longa com Cinto', 25, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -222,9 +229,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$60.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Vestido de Moleton 3 em 1', 60, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Vestido de Moleton 3 em 1', 60, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -239,9 +247,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$60.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Vestido de Moleton 3 em 1', 60, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Vestido de Moleton 3 em 1', 60, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -256,9 +265,10 @@
 							<p>
 								<div class='row' style='justify-content: center'>
 									<b>R$60.00</b>
-									<a class='spanImg' href="javascript:void(0)" onclick="addProduct('Vestido de Moleton 3 em 1', 60, 1)">
-										<span class="glyphicon glyphicon-shopping-cart spanImg"></span>
-									</a>
+									<button class='addButton' onclick="addProduct('Vestido de Moleton 3 em 1', 60, 1)">
+										<span class="glyphicon glyphicon-plus "></span>
+										<b>Comprar</b>
+									</button>
 								</div>
 							</p>
 						</div>
@@ -306,6 +316,42 @@
 				</footer>
 
 			</main>
+		</div>
+	</div>
+	
+	<!-- Botao de visualizacao do carrinho - Desktop -->
+	<div class="navbar-toggler-right hidden-xs-down barButtons" id='showKart'>
+		<button class="checkOutButton" type="button" onclick='showKart();'>
+			<b style='font-size:15px'>Ver Carrinho</b>
+			<span class="glyphicon glyphicon-shopping-cart cartSpan"></span>
+		</button>
+	</div>
+	<div class='container' id='kartScreen'>
+		<table class='table'>
+			<thead>
+			  <tr>
+				<th>Produto</th>
+				<th>Quantidade</th>
+				<th>Valor</th>
+			  </tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>Nome do Produto</td>
+				<td>1</td>
+				<td>R$50.00</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class='atBottom'>
+			<button class="checkOutButton" type="button" onclick='showKart();'>
+				<b style='font-size:15px'>Check-Out</b>
+				<span class="glyphicon glyphicon-check cartSpan"></span>
+			</button>
+			<button class="checkOutButton" type="button" onclick='showKart();'>
+				<b style='font-size:15px'>Limpar Carrinho</b>
+				<span class="glyphicon glyphicon-trash cartSpan"></span>
+			</button>
 		</div>
 	</div>
 
