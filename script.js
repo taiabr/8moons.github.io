@@ -1,112 +1,118 @@
-$(document).ready(function() {	
+$(document).ready( function() {	
 	
-	////// Variáveis / Classes /////////////////////////////////////////////////////////////////////////////////////////////////	
-	var id = 0;
-	var shoppingKart = [];
-	
-	class myProduct{
-		constructor(id, name, value, qtd){
-			this.id    = id;
-			this.name  = name;
-			this.value = value;
-			this.qtd   = qtd;
+	////// Interface ///////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	toggleKart = function() {
+		if($('#kartScreen').is(":visible") === true ){
+			loadKart();
+		} else {
+			clearKart();
 		};
-	};
-
-	////// Métodos de Interface ////////////////////////////////////////////////////////////////////////////////////////////////	
-	showKart = function() {
 		// Exibe a tela com os itens do carrinho
 		$('#kartScreen').toggle();
 	};
+	toggleConfig = function() {
+		// Exibe a tela de manutenção
+		$('#configScreen').toggle();
+	};
 	
-	////// Métodos de Processamento ////////////////////////////////////////////////////////////////////////////////////////////	
-    onAction = function(action) {
-        switch (action) {
-            case 'add':
-				addProduct();
-                break;
-            case 'remove':
-                removeProduct(id);
-                break;
-            case 'clear':
-                clearKart();
-                break;
-            case 'checkOut':
-                checkOut();
-                break;
-            default:
-                break;
-        };
-    };
+	////// Variáveis ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var id = 0;	
+	var myGrid = [ 
+		{
+			"id   ": "00001",
+			"name ": "Nome 01",
+			"value": "10.00",
+			"qtd  ": "01",
+		},
+		{
+			"id   ": "00002",
+			"name ": "Nome 02",
+			"value": "20.00",
+			"qtd  ": "02",
+		} 
+	];
+	var shoppingKart = myGrid;
+	
+	////// Processamento ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	loadKart = function(){
+		// Carrega os itens do carrinho no popup
+		shoppingKart.map( function(item){
+			appendKartItem(item);
+		});
+	};
 		
-	addProduct = function(name, value, qtd) {
-		if(qtd > 0){
-			var newProduct = new myProduct(id, name, value, qtd);
-			shoppingKart.push(newProduct)		
-			id ++;
-		} else {
-			alert('Quantidade do produto '+ name +' não pode ser 0');
+	appendKartItem = function(item){		
+		var myId = item.id;
+		var myName = item.name;
+		var myValue = item.value;
+		var myQdt = item.qdt;
+	
+		// Adiciona linha à tabela do carrinho
+		var code = "<tr id='"
+					+myId
+					+"'>" 
+					+"<td>"
+					+myName
+					+"</td>"
+					+"<td>"
+					+myValue
+					+"</td>"
+					+"<td>"
+					+myQdt
+					+"</td>"
+					+"<td>"
+					+"<button class='removeButton'>"
+					+"<span class='glyphicon glyphicon-remove-circle'></span>"
+					+"</button>"					
+					+"</td>"
+					+"</tr>";					
+		$('#kartResult').append(code);
+	};
+	
+	
+	//Adiciona ao carrinho
+	addToKart = function(id){		
+		// recupera do myGrid[] 
+		var result = myGrid.filter( function(obj){ return obj.id === id; });
+		if (result === undefined) {
+			//insere no shoppingKart[]
+			shoppingKart.push(result[0])			
 		};
 	};
-		
-	removeProduct = function(id) {
-		shoppingKart.splice(id,1);
-	};
 	
-	clearKart = function() {
+	// Remove do carrinho
+	$('.removeButton').click(function() {
+		var thisId = $(this).closest("tr").attr('id');
+		// remove do shoppingKart[]
+		shoppingKart.splice(thisId,1);		
+		// atualiza tela
+		loadKart();
+	});		
+	
+	// Limpa o carrinho
+	clearKart = function(id){
+		// remove do shoppingKart[]
 		shoppingKart.splice(0,shoppingKart.length);
-		id = 0;
+		// atualiza tela
+		loadKart();
 	};
 	
-	checkOut = function() {
-		var result = [];
-		var totalValue = 0;
-		var log = '';
-		
-		for (var i = 0; i < shoppingKart.length;i++){
-			// Calcula valor total
-			totalValue += (shoppingKart[i].value * shoppingKart[i].qtd);
-			
-			// Insere log
-			log = "\n" 
-				+ "Produto: " + shoppingKart[i].name 
-				+ "\n" 
-				+ "Valor: " + shoppingKart[i].value 
-				+ "\n" 
-				+ "Qtd: " + shoppingKart[i].qtd 
-				+ "\n";
-			
-			result.push(log);
-			result.push('');
-		};
-		
-		// Insere valor total
-		log = "\n" + "Total: " + totalValue;
-		result.push('');		
-		result.push(log);		
-		
-		show(result);
-		clearKart();
+	////// Configuração ////////////////////////////////////////////////////////////////////////////////////////////////////////			
+	submitForm = function(){
+		// recupera do FORM e insere no firebase
 	};
-	
-	show = function(log){
-		if (id === 0 ){
-			alert("Carrinho vazio!");	
-		} else {
-			alert(log);			
-		};
+	loadProducts = function(){
+		// recupera do firebase e insere no array myGrid
 	};
-	
+	deleteProduct = function(){
+		// remove produto do firebase
+	};
 	
 	
 	////// Inicializando ///////////////////////////////////////////////////////////////////////////////////////////////////////	
-	showKart();
+	toggleKart();
+	toggleConfig();
 	
-	////// TESTES //////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	// addProduct('0',20,1);
-	// addProduct('1',25,3);
-	// addProduct('2',28,1);
-	// addProduct('3',24,9);
-	// clearKart();
-	// checkOut();
+	
+	
 });

@@ -179,6 +179,7 @@ template {
 
 html {
     background-image: none;
+	z-index: 0;
 }
 * {
     font-family: Inconsolata !important;
@@ -283,20 +284,17 @@ h1 {
     background-color: #DCDCDC !important;
 	color: black;
     border-radius: 10px;	
-	margin-left: 30%;
-	margin-right: 30%;
+	margin: 5% 30% 0 30%;
 }
 .bodyTitle {
     text-align: center;
 }
 .atBottom {
     position: absolute;
-    /* position: bottom; */
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 1000;
-    /* margin-bottom: 20px; */
 	margin-top: 50%;
 }
 .spaceForMenu {
@@ -389,16 +387,6 @@ h1 {
 	background-color: transparent;	
 	z-index: 99999;
 }
-.checkOutButton{
-	color: white;
-	background-color: gray;
-	border: none;
-	border: none;
-	border-radius: 10px;
-	font-size: 20px;
-	margin-top: 5px;
-    float: right;
-}
 .addButton{
 	background-color: transparent;		
 	color: black;
@@ -406,9 +394,14 @@ h1 {
 	border: none;
 	margin: 0 0 0 10%;
 }
-.cartSpan{
-	width: 30px;
-	height: 25px;
+.checkOutButton{
+	color: white;
+	background-color: gray;
+	border: none;
+	border-radius: 10px;
+	font-size: 20px;
+	margin-top: 5px;
+    float: right;
 }
 
 /* TELA DE EXIBICAO DO CARRINHO */
@@ -421,3 +414,82 @@ h1 {
 	top: 15px;
 	z-index: 99999999999999999;
 }
+.configScreen{
+	background-color: black;
+	color: white;
+	margin: auto;
+	margin-top: 3%;
+	width: 500px;
+	height: 500px;	
+}
+.closeButton{
+	color: white;
+	background-color: gray;
+	border: none;
+	border-radius: 10px;
+	font-size: 15px;
+	margin: 2% 0 0 0;
+    float: right;
+}
+.popupButtons{
+	color: white;
+	background-color: gray;
+	border: none;
+	border-radius: 10px;
+    float: right;
+	font-size: 75%;
+	margin: 0 2% 2% 2%;
+}
+.removeButton{
+	background-color: transparent;
+	border: none;
+	font-size: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+/******************* INIT CONFIG SCREEN **************/
+.configBackground{
+	margin: 5% 25% 5% 25%; 
+	height: auto;
+	background-color: black;
+	color: white;
+}
+.removeProduct{
+	font-size: 15px;
+	vertical-align: bottom;
+}
+.configButton{
+	color: white;
+	background-color: black;
+	border: none;
+	border-radius: 10px;
+	font-size: 10px;
+	margin-top: 5px;
+	text-align: center;
+}
+.colorButtons{
+	background-color: gray;	
+	border-color: lightgray;
+}
+/******************* END CONFIG SCREEN ***************/
+
+
+
+
+
+
+
+
+
+
+
+
