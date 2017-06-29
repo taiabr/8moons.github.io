@@ -253,15 +253,15 @@ h1 {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
+
+/******************* MY STYLES ***************/
 .myItem {
     font-style: italic;
     font-size: 12px;
 }
 .myMain {
-    padding-top: 0rem;
     overflow-y: auto !important;
     position: fixed !important;
-    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
@@ -326,10 +326,6 @@ h1 {
 .miniMenu{
 	/* width: 100%;	 */
 }
-.miniMenuButton {
-    font-size: 20px;
-    margin-top: 2%;
-}
 .miniMenuTitle {
     color: white !important;
 }
@@ -383,10 +379,19 @@ h1 {
 .barButtons {
 	display: inline;
     float: right;
-    margin: 0 2% 5% 0;
-	position: fixed;
+	border: none;
+	height: auto;
 	background-color: transparent;	
 	z-index: 99999;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+.miniMenuButton {
+    font-size: 20px;
+	height: auto;
+	text-align: center;
+	border: none;
 }
 .checkOutButton{
 	color: white;
@@ -403,24 +408,37 @@ h1 {
 	display: inline-flex;
 	border: none;
 }
-
-
-
-
-
-
-
-
-
-/* TELA DE EXIBICAO DO CARRINHO */
-#kartScreen{
+.miniButtonsBar{
+	display: inline-block;
+    vertical-align: top;
+}
+#kartScreen {
 	background-color: black;
 	color: white;
 	margin: auto;
-	width: 500px;
-	height: 500px;
+	width: 80%;
+	min-width: 15%;
+	height: auto;
+	min-height: 170px;
 	top: 15px;
 	z-index: 99999999999999999;
+}
+#loginScreen{
+	background-color: black;
+	color: white;
+	width: 100%;
+	height:100vh;
+	top: 0;
+	left: 0;
+	margin: auto;
+	z-index: 99999999999999999;	
+	position: absolute;
+}
+.singInBtn{
+	color: white;
+	background-color: gray;	
+	border: none;
+	margin: 0 0 2% 0;
 }
 .configScreen{
 	background-color: black;
@@ -456,18 +474,6 @@ h1 {
 .text-center{
 	text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-/******************* INIT CONFIG SCREEN **************/
 .configBackground{
 	margin: 5% 25% 5% 25%; 
 	height: auto;
@@ -481,7 +487,6 @@ h1 {
 .configButton{
 	color: white;
 	background-color: black;
-	/* border: none; */
 	border-radius: 10px;
 	font-size: 9px;
 	padding: 0 0 0 3px;
@@ -490,7 +495,6 @@ h1 {
 	background-color: gray;	
 	border-color: lightgray;
 }
-/******************* END CONFIG SCREEN ***************/
 
 
 

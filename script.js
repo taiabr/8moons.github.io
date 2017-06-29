@@ -1,38 +1,27 @@
 $(document).ready( function() {	
 	
-	////// Variáveis ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var id = 0;	
 	var myDeparts = [];
 	var myGrid = [];
 	var shoppingKart = [];
 	
-	////// Processamento ///////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Inicializa a pagina
+	// Abrindo a pagina
 	onInit = function(){
 		toggleKart();
-		toggleConfig();
-		loadProducts();
+		// toggleLogin();
+		loadGrid();
 	};		
-	// Sai da pagina
+	// Saindo da pagina
 	onExit = function(){
 		// Salva modificações no BD
-	};			
+	};		
+	
+	////// Shopping Kart ///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Exibe/Esconde tela do carrinho
 	toggleKart = function() {
 		// Exibe a tela com os itens do carrinho
 		$('#kartScreen').toggle();
 		loadKart();
-	};
-	// Exibe/Esconde tela de manutenção
-	toggleConfig = function() {
-		// Exibe a tela de manutenção
-		$('#configScreen').toggle();
-	};	
-	// Recupera item do Grid
-	getGridItem = function(itemId){
-		return myGrid.find( function(gridItem){
-			return gridItem.id === itemId;
-		});		
 	};
 	// Recupera item do carrinho
 	getKartItem = function(itemId){		
@@ -76,6 +65,61 @@ $(document).ready( function() {
 			removeFromKart(thisId);
 			loadKart();
 		});	
+	};
+	// Remove do carrinho
+	removeFromKart = function(thisId){
+		var thisItem = getKartItem(thisId);
+		var itemIndex = shoppingKart.indexOf(thisItem);	
+		
+		if (thisItem.qtd > 1){
+			shoppingKart[itemIndex].qtd -= 1;
+		} else {				
+			shoppingKart.splice( itemIndex, 1);	
+		};
+	};
+	//Adiciona ao carrinho
+	addToKart = function(itemId, addQtd){	
+		// Busca item no Grid
+		var gridItem = getGridItem(itemId);
+		// Busca item no carrinho
+		var kartItem = getKartItem(itemId);			
+		
+		// Ainda nao esta no carrinho
+		if ( kartItem === undefined ){			
+			// Monta novo item
+			var newItem = Object.assign({}, gridItem);
+			newItem.qtd = addQtd;
+		
+			// Adiciona ao carrinho
+			shoppingKart.push( newItem );	
+			
+		} else {	
+			
+			if ( gridItem.qtd < (kartItem.qtd + addQtd) ){
+				alert('Sem quantidade suficiente!');		
+			
+			} else {
+				// Atualiza a qtd de itens no carrinho
+				var itemIndex = shoppingKart.indexOf(kartItem);
+				shoppingKart[itemIndex].qtd += addQtd;
+			};
+			
+		};
+	};	
+	// Limpa o carrinho
+	clearKart = function(){
+		// Remove do shoppingKart[]
+		shoppingKart.splice(0,shoppingKart.length);	
+		// Limpa a tabela HTML do carrinho
+		$("#kartResult tr").remove(); 
+	};	
+	
+	////// Grid ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Recupera item do Grid
+	getGridItem = function(itemId){
+		return myGrid.find( function(gridItem){
+			return gridItem.id === itemId;
+		});		
 	};
 	// Insere HTML dos departamentos no grid
 	appendGridDepart = function(gridDepart){
@@ -164,59 +208,16 @@ $(document).ready( function() {
 		
 		
 	};
-	// Remove do carrinho
-	removeFromKart = function(thisId){
-		var thisItem = getKartItem(thisId);
-		var itemIndex = shoppingKart.indexOf(thisItem);	
-		
-		if (thisItem.qtd > 1){
-			shoppingKart[itemIndex].qtd -= 1;
-		} else {				
-			shoppingKart.splice( itemIndex, 1);	
-		};
-	};
-	//Adiciona ao carrinho
-	addToKart = function(itemId, addQtd){		
-		var newItem = getGridItem(itemId);
-		var kartItem = getKartItem(itemId);	
-		
-		// Ainda nao esta no carrinho
-		if ( kartItem === undefined ){
-			//Adiciona ao carrinho
-			newItem.qtd = addQtd;
-			shoppingKart.push( newItem );	
-			
-		} else {	
-			
-			if ( newItem.qtd < (kartItem.qtd + addQtd) ){
-				alert('Sem quantidade suficiente!');		
-			
-			// Atualiza a quantidade requisitada
-			} else {
-				//Atualiza a qtd do item no carrinho
-				var itemIndex = shoppingKart.indexOf(kartItem);
-				shoppingKart[itemIndex].qtd += addQtd;
-			};
-			
-		};
-	};
-	// Limpa o carrinho
-	clearKart = function(id){
-		// Remove do shoppingKart[]
-		shoppingKart.splice(0,shoppingKart.length);	
-		// Limpa a tabela HTML do carrinho
-		$("#kartResult tr").remove(); 
-	};		
 	// Carrega o grid
-	loadProducts = function(){		
+	loadGrid = function(){		
 		//Limpa a HTML
 		$('#pageGrid h3').remove();
 		$('#pageGrid section').remove();
 		
 		//Busca departamentos
-		myDeparts = getDepartTable();
+		// myDeparts = getDepartTable();
 		//Busca produtos
-		myGrid    = getProdTable();
+		// myGrid    = getProdTable();
 		
 //////////////////////////////// TESTE - INICIO ////////////////////////////////
 		myGrid = [{
@@ -224,7 +225,7 @@ $(document).ready( function() {
 			"name" : "Blusa de tricô",
 			"value": "30.00",
 			"size" : "Tamanho único",
-			"qtd"  : "1",
+			"qtd"  : "5",
 			"img"  : "images/bluda-trico.jpg",
 			"dept" : "00001",
 		},
@@ -233,7 +234,7 @@ $(document).ready( function() {
 			"name" : "Saia Longa com Cinto",
 			"value": "25.00",
 			"size" : "Tamanho M",
-			"qtd"  : "1",
+			"qtd"  : "5",
 			"img"  : "images/saia-longa.jpg",
 			"dept" : "00002",
 		},
@@ -242,7 +243,7 @@ $(document).ready( function() {
 			"name" : "Vestido de Moleton 3 em 1",
 			"value": "60.00",
 			"size" : "Tamanho M",
-			"qtd"  : "1",
+			"qtd"  : "5",
 			"img"  : "images/vestido-moleton.jpg",
 			"dept" : "00003",
 		}];		
@@ -258,45 +259,78 @@ $(document).ready( function() {
 			"id"   : "00003",
 			"name" : "Vestidos",
 		}];
-//////////////////////////////// TESTE - FIM ///////////////////////////////////		
-		
+//////////////////////////////// TESTE - FIM ///////////////////////////////////	
 		
 		//Insere dados em tela
 		appendGridItens(myDeparts, myGrid);
 	};
-	////// Firebase ////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	// var config = {
-		// apiKey: "AIzaSyAwm_buVA5z6szyeI1JjD_6zupg3vtIbJI",
-		// authDomain: "moons-bazaar.firebaseapp.com",
-		// databaseURL: "https://moons-bazaar.firebaseio.com",
-		// projectId: "moons-bazaar",
-		// storageBucket: "moons-bazaar.appspot.com",
-		// messagingSenderId: "281206407475"
-	// };
-	// firebase.initializeApp(config);
-
-	// Recupera a referência ao BD
-	// var myDatabase = firebase.database();
 	
-	// Envia formulário de manutenção
-	submitForm = function(){
-		// recupera do FORM e insere no firebase
-	};
-	// Recupera produtos cadastrados na base
-	getProdTable = function(){
+	////// Maintaince //////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Exibe/Esconde tela de Login
+	toggleLogin = function() {
+		// Exibe a tela de login
+		$('#loginScreen').toggle();
+	};		
+	// Tenta realizar o login
+	logIn = function(){		
+		var email    = $('#inputEmail').val();
+		var password = $('#inputSenha').val();
 		
+		// Valida usuario
+		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			alert(errorMessage);
+		});		
+		toggleLogin();
 	};
-	// Recupera departamentos cadastrados na base	
-	getDepartTable = function() {
-		
+	// Recupera do formulario e atualiza o firebase
+	submitForm = function(action){
+		switch (action) {
+			case 'INS':
+				var newProd = getFormProduct();
+				setProduct(newProd);
+				break;
+			case 'DEL':
+				break;
+			case 'UPD':
+				break;
+		};
 	};
-	// Remove produto do BD
+	// Adiciona produto ao firebase
+	setProduct = function(newProd){
+		var refProd = firebase.database().ref('products/');
+		refProd.set(newProd);
+	};
+	// Recupera produtos cadastrados no firebase
+	getProdTable = function(){		
+		var refProd = firebase.database().ref('products');
+	};
+	// Recupera departamentos cadastrados no firebase	
+	getDepartTable = function() {		
+		if (myGrid === undefined){
+			alert('Não possui produtos');
+		};
+	};
+	// Remove produto do firebase
 	deleteProduct = function(){
 		// remove produto do firebase
+	};	
+	
+
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyAwm_buVA5z6szyeI1JjD_6zupg3vtIbJI",
+		authDomain: "moons-bazaar.firebaseapp.com",
+		databaseURL: "https://moons-bazaar.firebaseio.com",
+		projectId: "moons-bazaar",
+		storageBucket: "moons-bazaar.appspot.com",
+		messagingSenderId: "281206407475"
 	};
-	
+	firebase.initializeApp(config);
+
+
 	////// Inicializando ///////////////////////////////////////////////////////////////////////////////////////////////////////	
-	onInit();
-	
+	onInit();	
 	
 });

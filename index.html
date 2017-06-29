@@ -24,7 +24,8 @@
 <body class='bodyBackground'>
 
 	<div class="container-fluid fixed-top">
-	
+		
+		<!-- VER CARRINHO - DESKTOP -->
 		<div class="navbar-toggler-right hidden-xs-down barButtons" id='showKart'>			
 			<button class="checkOutButton" type="button" onclick='toggleKart();'>
 				<b style='font-size:15px'>Ver Carrinho</b>
@@ -32,7 +33,7 @@
 			</button>
 		</div>
 	
-		<!-- BARRA DE MANU DESKTOP -->
+		<!-- BARRA DE MENU - DESKTOP -->
 		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar sidebarColor">		
 			<!-- LOGO -->
 			<a target="_blank" href="images/logo.png" class=''>
@@ -72,21 +73,20 @@
 
 		<!-- BARRA DE MANU MOBILE -->
 		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top hidden-sm-up sidebarColor miniMenu">
-			<button class="navbar-toggler navbar-toggler-right hidden-lg-up miniMenuButton" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<!-- BOTOES DA BARRA DE MENU -->
+			<div class="navbar-toggler-right barButtons">
+				<button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" onclick='toggleKart();'>
+					<span class="glyphicon glyphicon-shopping-cart"></span>
+				</button>	
+				<button class="navbar-toggler hidden-lg-up miniMenuButton" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="glyphicon glyphicon-menu-hamburger"></span>
+				</button>
+			</div>	
+			
 			<a class="navbar-brand miniMenuTitle" href="images/logo.png">
 				8Moons Bazaar
-			</a>			
+			</a>	
 			
-			<!-- Botao de visualizacao do carrinho - Mobile -->
-			<div class="navbar-toggler-right hidden-lg-up miniMenuButton barButtons" id='showKart'>
-				<!-- <button class="checkOutButton" type="button" onclick='toggleKart();'> -->
-					<!-- <b style='font-size:15px'>Ver Carrinho</b> -->
-					<!-- <span class="glyphicon glyphicon-shopping-cart cartSpan"></span> -->
-				<!-- </button> -->
-			</div>
-
 			<div class="collapse navbar-collapse miniMenuOptions" id="navbarsExampleDefault">
 				<!-- Opcoes do menu -->
 				<ul class="navbar-nav mr-auto miniMenuUl">
@@ -102,7 +102,16 @@
 					<br>
 					<br>
 					<li class="nav-item active miniMenuLi myItem">
-						<a class="nav-link miniMenuOption" href="#footerInfo">Informações</a>
+						<a class="nav-link miniMenuOption" href="#footerInfo">
+							<span class="glyphicon glyphicon-info-sign"></span>
+							Informações
+						</a>
+					</li>
+					<li class="nav-item active miniMenuLi myItem">
+						<a class="nav-link miniMenuOption" target="_blank" href="index_config.html">
+							<span class="glyphicon glyphicon-wrench"></span>
+							Manutenção
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -119,6 +128,7 @@
 				<div id='pageGrid'>
 				</div>
 				
+				<!-- RODAPE -->
 				<footer class=' myFooter sidebarColor' id='footerInfo'>
 					<div class='contactTitleDiv'>
 						<h5>
@@ -164,7 +174,7 @@
 	</div>
 	
 	<!-- Visualizacao do carrinho - Desktop -->
-	<div class='container' id='kartScreen'>
+	<div class='container offset-sm-3' id='kartScreen'> 
 		<button class="closeButton" type="button" onclick='toggleKart();'>
 			<!-- <b style='font-size:15px'>Check-Out</b> -->
 			<span class="glyphicon glyphicon-remove "></span>
@@ -197,8 +207,13 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 	<script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
 
-	<!-- Icons for Bootstrap -->
+	<!-- Script for icons - Bootstrap -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Script for Firebase -->
+	<!-- <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script> -->
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+
 
 	<!-- My Scripts -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
