@@ -22,14 +22,14 @@
 
 	<!-- POP-UP FOR LOGIN -->
 	<div class="" id='loginScreen'>
-		<form class="form-signin">
+		<form class="form-signin" onsubmit='tryLogin()'>
 			<h2 class="form-signin-heading">Insira e-mail e senha:</h2>
 			<!-- <label for="inputEmail" class="sr-only">Email address</label> -->
 			<input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
 			<!-- <label for="inputPassword" class="sr-only">Password</label> -->
 			<input type="password" id="inputSenha" class="form-control" placeholder="Senha" required>
 			<div class="checkbox"></div>
-			<button class="btn btn-lg btn-primary btn-block singInBtn" type="submit" onclick="logIn()">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block singInBtn" type="submit">Sign in</button>
 		</form>
 	</div>
 
@@ -92,10 +92,15 @@
 
 	<!-- JavaScript for Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 	<script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
 
 	<!-- Icons for Bootstrap -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Script for Firebase -->
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 
 	<!-- My Scripts -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

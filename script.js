@@ -1,336 +1,355 @@
-$(document).ready( function() {	
-	
-	var id = 0;	
-	var myDeparts = [];
-	var myGrid = [];
-	var shoppingKart = [];
-	
-	// Abrindo a pagina
-	onInit = function(){
-		toggleKart();
-		// toggleLogin();
-		loadGrid();
-	};		
-	// Saindo da pagina
-	onExit = function(){
-		// Salva modificações no BD
-	};		
-	
-	////// Shopping Kart ///////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Exibe/Esconde tela do carrinho
-	toggleKart = function() {
-		// Exibe a tela com os itens do carrinho
-		$('#kartScreen').toggle();
-		loadKart();
-	};
-	// Recupera item do carrinho
-	getKartItem = function(itemId){		
-		return shoppingKart.find( function(kartItem){
-			return kartItem.id === itemId;
-		});
-	};
-	// Carrega informação do carrinho
-	loadKart = function(){ 
-		// Limpa a tabela HTML do carrinho
-		$("#kartResult tr").remove(); 
-		// Carrega os itens do carrinho no popup
-		for (var i = 0; i < shoppingKart.length; i++){
-			appendKartItem(shoppingKart[i]);			
-		};
-	};
-	// Insere HTML de item do carrinho
-	appendKartItem = function(kartItem){		
-		// Monta ID para o botao
-		var btnId = 'remove-' + String(kartItem.id);
-		
-		// Adiciona linha à tabela do carrinho
-		var code 
-				= "<tr " + "id='" + kartItem.id + "'>" 
-					+ "<td>" + kartItem.name + "</td>"
-					+ "<td>" + 'R$ ' + kartItem.value + "</td>"
-					+ "<td>" + kartItem.qtd + "</td>"
-					+ "<td>"
-						+ "<button class='removeButton' id='" + btnId + "'>"
-							+ "<span class='glyphicon glyphicon-remove-circle'></span>"
-						+ "</button>"					
-					+ "</td>"
-				+ "</tr>";					
-		$('#kartResult').append(code);	
-		
-		// Seta ação do botao
-		btnId = '#' + btnId;
-		$( btnId ).click(function() {
-			var thisId = $(this).closest("tr").attr('id');
-			// remove do shoppingKart[]
-			removeFromKart(thisId);
-			loadKart();
-		});	
-	};
-	// Remove do carrinho
-	removeFromKart = function(thisId){
-		var thisItem = getKartItem(thisId);
-		var itemIndex = shoppingKart.indexOf(thisItem);	
-		
-		if (thisItem.qtd > 1){
-			shoppingKart[itemIndex].qtd -= 1;
-		} else {				
-			shoppingKart.splice( itemIndex, 1);	
-		};
-	};
-	//Adiciona ao carrinho
-	addToKart = function(itemId, addQtd){	
-		// Busca item no Grid
-		var gridItem = getGridItem(itemId);
-		// Busca item no carrinho
-		var kartItem = getKartItem(itemId);			
-		
-		// Ainda nao esta no carrinho
-		if ( kartItem === undefined ){			
-			// Monta novo item
-			var newItem = Object.assign({}, gridItem);
-			newItem.qtd = addQtd;
-		
-			// Adiciona ao carrinho
-			shoppingKart.push( newItem );	
-			
-		} else {	
-			
-			if ( gridItem.qtd < (kartItem.qtd + addQtd) ){
-				alert('Sem quantidade suficiente!');		
-			
-			} else {
-				// Atualiza a qtd de itens no carrinho
-				var itemIndex = shoppingKart.indexOf(kartItem);
-				shoppingKart[itemIndex].qtd += addQtd;
-			};
-			
-		};
-	};	
-	// Limpa o carrinho
-	clearKart = function(){
-		// Remove do shoppingKart[]
-		shoppingKart.splice(0,shoppingKart.length);	
-		// Limpa a tabela HTML do carrinho
-		$("#kartResult tr").remove(); 
-	};	
-	
-	////// Grid ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Recupera item do Grid
-	getGridItem = function(itemId){
-		return myGrid.find( function(gridItem){
-			return gridItem.id === itemId;
-		});		
-	};
-	// Insere HTML dos departamentos no grid
-	appendGridDepart = function(gridDepart){
-		var code = "<h3 class='sectionTitle' id='" + dept + ">" + departName + "</h3>"
-					+ "<section class='row text-center placeholders mySection' style='border-bottom: 1px solid #eee;'>" 
-					+ "$$P"
-					+ "</section>";
-		$('#pageGrid').append(code);
-	};
-	// Insere HTML dos produtos no grid
-	appendGridItens = function(departTable, prodTable){		
-	
-		var code = '';
-	
-		//Cada departamento
-		// for (var i = 0; i < departTable.length; i++){
-		departTable.forEach( function(departLine){	
-		
-			//Busca produtos daquele departamento
-			var prodsOfDepart = prodTable.filter(function(prodLine){
-				return prodLine.dept === departLine.id;
-			});
-			
-			//Se possuir produtos para esse departamento
-			if (prodsOfDepart.length != 0){					
-								
-				var departProds = '';
+// ALT + SHIFT + 0  e  ALT + 3
+// USAR O STORAGE PRA GUARDAR AS IMAGENS
 
-				//Para cada produto desse departamento
-				// for (var j = 0; j < prodsOfDepart.length; j++){
-				prodsOfDepart.forEach( function(prodLine){
-					
-					// Monta ID para o botao
-					var btnId = '#add-' + String(prodLine.id);
-					
-					// Monta codigo do grid
-					var newProd 
-						= "<div class='col-6 col-sm-3 placeholder myProduct' id='" + prodLine.id + "'>"
-							+ "<a target='_blank' href='" + prodLine.img + "'>"
-								+ "<img src='" + prodLine.img + "' width='200' height='200' class='img-fluid' alt='Generic placeholder thumbnail'>" 
-							+ "</a>"
-							+ "<table class='table'>" 
-								+ "<tbody>"
-									+ "<tr>" 
-										+ "<h4 class='prodName'>" + prodLine.name + "</h4>" 
-									+ "</tr>"
-									+ "<tr>" 
-										+ "<p class='prodSize'>" + prodLine.size + "</p>" 
-									+ "</tr>"
-									+ "<tr>" 
-										+ "<p class='prodValue'>" + 'R$ ' + prodLine.value + "</p>" 
-									+ "</tr>" 
-									+ "<tr>" 
-										+ "<button class='addButton' id='" + btnId + "'>" 
-											+ "<span class='glyphicon glyphicon-plus'></span>" 
-											+ "<b>Comprar</b>" 
-										+ "</button>" 
-									+ "</tr>" 
-								+ "</tbody>" 
-							+ "</table>" 
-						+ "</div>";
-								
-					departProds += newProd;
-				});
+var myDeparts = [];
+var imgsMapp = [];	
+var myGrid = {};
+var myKart = {};
+	
+$(document).ready(function() {
+		
+    // Grid
+    var clGrid = class {
+		// Carrega o grid - loadGrid
+        static load() {
+			// Seta atualizacao automatica
+			var ref = firebase.database().ref();
+			ref.once("value").then(function(snapshot) {
+				var myData = snapshot.child('products').val();
 				
-				var newDepart 	
-						= "<h3 class='sectionTitle' id='" + departLine.name + "'>" + departLine.name + "</h3>"
-						+ "<section class='row text-center placeholders mySection'>"
-							+ departProds 
-						+ "</section>";
+				myGrid = Object.assign({}, myData);
+				clGrid.appendItens(myGrid);	
+				setImgMapping(imgsMapp);	   
+			});
+        };
+		// Recupera departamentos - getarrayDepart
+        static getDeparts(objProds) {
+			myDeparts = [];
+            for(var id in objProds) {		
+				var thisDepart = myDeparts.find( function(depart){ 
+					return depart === objProds[id].dept 
+				});				
+				if(thisDepart === undefined || thisDepart === null){ 
+					myDeparts.push(objProds[id].dept) 
+				};				
+            };		
+			return myDeparts;
+        };		
+		// Insere HTML dos produtos no grid - appendGridItens
+        static appendItens(myProds) {
+
+            var code = '';
+			
+            //Limpa o HTML
+            $('#pageGrid h3').remove();
+            $('#pageGrid section').remove();
+			
+			myDeparts = clGrid.getDeparts(myProds);		
+			
+            //Cada departamento
+            myDeparts.forEach(function(depart) {
+
+                //Busca produtos daquele departamento
+				var prodsInDepart = clGrid.getFilteredProds(myProds, 'dept', depart);
+
+                //Se possuir produtos para esse departamento
+                if (prodsInDepart != undefined && prodsInDepart != null) {
+
+                    var departProds = '';
+
+                    //Para cada produto desse departamento
+					for (var id in prodsInDepart){
+						var thisProd = prodsInDepart[id];
+						
+						if(thisProd != undefined){
+							// Monta ID para o botao
+							var btnId = '#add-' + thisProd.id;
+							// Monta ID para a imagem
+							var imgId = 'img-' + thisProd.id;
+							var linkID = imgId + 'a';
+
+							// Monta codigo do grid
+							var newProd 
+									= "<div class='col-6 col-sm-3 placeholder myProduct' id='" + thisProd.id + "'>" 
+									// + "<a target='_blank' href='" + thisProd.img + "'>"
+									+ "<a target='_blank' id='" + linkID + "'>"
+									+ "<img id='" + imgId +  "' width='200' height='200' class='img-fluid' alt='" + thisProd.name + "'>" 
+									+ "</a>" 
+									+ "<table class='table'>" 
+									+ "<tbody>" 
+									+ "<tr>" 
+									+ "<h4 class='prodName'>" + thisProd.name + "</h4>" 
+									+ "</tr>" 
+									+ "<tr>" 
+									+ "<p class='prodSize'>" + thisProd.size + "</p>" 
+									+ "</tr>" 
+									+ "<tr>" 
+									+ "<p class='prodValue'>" + 'R$ ' + thisProd.value + "</p>" 
+									+ "</tr>" 
+									+ "<tr>" 
+									+ "<button class='addButton' id='" + btnId + "'>" 
+									+ "<span class='glyphicon glyphicon-plus'></span>" 
+									+ "<b>Comprar</b>" 
+									+ "</button>" 
+									+ "</tr>" 
+									+ "</tbody>" 
+									+ "</table>" 
+									+ "</div>";
+
+							departProds += newProd;
+							setImgForMapp(thisProd.img, imgId);
+						};
+                    };
+					
+                    var newDepart 
+								= "<h3 class='sectionTitle' id='" + depart + "'>" + depart + "</h3>" 
+								+ "<section class='row text-center placeholders mySection'>" 
+								+ departProds 
+								+ "</section>";
+                };
+
+                code += newDepart;
+
+            });
+
+            // Adiciona codigo ao HTML
+            $('#pageGrid').append(code);
+
+            // Seta ação DE ADIÇÃO do botao
+            $('.addButton').click(function() {
+                var itemId = $(this).closest("div").attr('id');
+                // Adiciona ao myKart[]
+                clKart.addItem(itemId, 1);
+            });
+        };
+		//Busca produtos de certo departamento
+		static getFilteredProds(myProds, property, value){
+			var filteredProds = {};
+			
+			for(var id in myProds){
+				var thisProd = myProds[id];
+				
+				if(thisProd[property] === value){
+					filteredProds[id] = myProds[id];
+				};
 			};
 			
-			code += newDepart;
+			return filteredProds;
+		};
+	}; // end-clGrid
+    // Carrinho
+    var clKart = class {
+        // Exibe/Esconde tela do carrinho - toggleKart
+        static toggle() {
+            $('#kartScreen').toggle();
+            clKart.load();
+        };
+		//Adiciona ao carrinho - addToKart
+        static addItem(itemId, addQtd) {
+            // Busca item no Grid
+            var gridItem = getById(itemId, myGrid);
+            // Busca item no carrinho
+            var kartItem = getById(itemId, myKart);
+
+            // Insere no carrinho
+            if (kartItem === undefined) {
+                // Monta novo item
+                var newItem = Object.assign({}, gridItem);
+                newItem.qtd = addQtd;
+
+                // Adiciona ao carrinho
+				myKart[ Object.entries(myKart).length ] = newItem;
+
+			// Atualiza a qtd de itens no carrinho
+            } else {
+                if (gridItem.qtd < (kartItem.qtd + addQtd)) {
+                    alert('Sem quantidade suficiente!');
+                } else {
+					kartItem.qtd += addQtd;
+                };
+            };
+        };
+        // Carrega informação do carrinho - loadKart
+        static load() {
+            // Limpa a tabela HTML do carrinho
+            $("#kartResult tr").remove();
 			
+            // Carrega a tabela HTML com o carrinho atualizado
+            for (var id in myKart) { if (myKart[id].qtd > 0) { clKart.appendItem( myKart[id]); } };
+        };
+        // Insere HTML de item do carrinho - appendKartItem
+        static appendItem(kartItem) {
+            // Monta ID para o botao
+            var btnId = 'remove-' + kartItem.id;
+
+            // Adiciona linha à tabela do carrinho
+            var code 
+					= "<tr " + "id='" + kartItem.id + "'>" 
+					+ "<td>" + kartItem.name + "</td>" 
+					+ "<td>" + kartItem.size + "</td>" 
+					+ "<td>" + 'R$ ' + kartItem.value + "</td>" 
+					+ "<td>" + kartItem.qtd + "</td>" 
+					+ "<td>" 
+					+ "<button class='removeButton' id='" + btnId + "'>" 
+					+ "<span class='glyphicon glyphicon-remove-circle'></span>" 
+					+ "</button>" 
+					+ "</td>" 
+					+ "</tr>";
+            $('#kartResult').append(code);
+
+            // Seta ação do botao
+            btnId = '#' + btnId;
+            $(btnId).click(function() {
+                var itemId = $(this).closest("tr").attr('id');
+                // remove do myKart[]
+                clKart.removeItem(itemId);
+                clKart.load();
+            });
+        };
+        // Remove do carrinho - removeFromKart
+        static removeItem(itemId) {		
+			var myItem = getById(itemId, myKart);
+            if (myItem.qtd > 1) {
+                myItem.qtd -= 1;
+            } else {
+                myItem.qtd = 0;
+            };
+        };
+        // Limpa o carrinho - clearKart
+        static clear() {
+            myKart = {};
+            // $("#kartResult tr").remove(); 
+            clKart.load();
+        };
+    }; // end-clKart
+	
+	// Login
+    var clLogin = class {
+        // Exibe/Esconde tela de Login - toggleLogin
+        static toggle() {
+            // Exibe a tela de login
+            $('#loginScreen').toggle();
+        };
+        // Tenta realizar o login - logIn
+        static logIn(email, password) {
+			clFirebase.init();
+            // Valida usuario
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				
+				if (errorCode === 'auth/wrong-password') {
+					alert('Wrong password.');
+				} else {
+					alert(errorMessage);
+				}
+				console.log(error);
+				
+            });
+			clLogin.toggle();
+        };
+    }; // end-clLogin
+    // Firebase (tutorial https://www.tutorialspoint.com/firebase)
+    var clFirebase = class {
+        // Inicializa - init
+        static init() {
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyCYsRQQ2xTOkE7XIJSQxQYM_WaKsa-gtvY",
+				authDomain: "moons-bazzar.firebaseapp.com",
+				databaseURL: "https://moons-bazzar.firebaseio.com",
+				projectId: "moons-bazzar",
+				storageBucket: "moons-bazzar.appspot.com",
+				messagingSenderId: "244394754480"
+			};
+			firebase.initializeApp(config);
+				};
+        // Submit do formulario - submitForm
+        static submit(action) {
+            switch (action) {
+                case 'INS':
+					clFirebase.insert();
+                    break;
+                case 'DEL':
+					clFirebase.insert();
+                    break;
+                case 'UPD':
+					clFirebase.update();
+                    break;
+            };
+        };
+        // Adiciona produto - insProduct
+        static insert(newProd) {
+            var refProd = firebase.database().ref("products");
+            refProd.push(newProd);
+        };
+        // Atualiza produto - updProduct
+        static update(itemId, itemField, newValue) {
+            var refPath = "products/" + itemId;
+            var itemRef = firebase.database().ref(refPath);
+            var updItem = Object.assign({}, myGrid[itemId]);
+
+            updItem[itemField] = newValue;
+            itemRef.update(updItem);
+        };
+        // Salva imagem no storage
+        static saveImg(imgPath) {
+			var storage = firebase.storage();
+			var storageRef = storage.ref();
+			storageRef.bucket.upload(imgPath, function(err, file){
+				if (err){
+					alert('Imagens foi salva!');
+				};
+			});
+        };		
+    }; // end-clFirebase
+
+    clearKart = function() {
+        clKart.clear();
+    };
+    toggleKart = function() {
+        clKart.toggle();
+    };
+	getById = function(itemId, obj){		
+		for (var i in obj) {
+			if(obj[i].id === itemId){
+				return obj[i];
+			};
+		};			
+	};
+	setImgMapping = function(mappingArray){
+		for (var i = 0; i < mappingArray.length; i++){
+			setImg2Screen(mappingArray[i].img, mappingArray[i].id);			
+		};		
+	};
+	setImgForMapp = function(imgPath, id){
+		var imgID = '#' + id;
+		var map = {img: imgPath , id: imgID };
+		imgsMapp.push(map);
+	};
+	setImg2Screen = function(imgPath, imgID) {
+		var storage = firebase.storage();
+		var storageRef = storage.ref();
+		// storageRef.child(imgPath).getDownloadURL().then(function(url) {		
+		
+		var imagesRef = storageRef.child('images');	
+		imagesRef.child(imgPath).getDownloadURL().then(function(url) {		
+		
+			var linkID = imgID + 'a';
+			$(imgID).attr("src", url);
+			$(linkID).attr("href", url);
 		});
-		
-		// Adiciona codigo ao HTML
-		$('#pageGrid').append(code);
-					
-		// Seta ação DE ADIÇÃO do botao
-		$('.addButton').click(function() {			
-			var itemId = $(this).closest("div").attr('id');
-			// Adiciona ao shoppingKart[]
-			addToKart(itemId, 1);	
-		});			
-		
-		
 	};
-	// Carrega o grid
-	loadGrid = function(){		
-		//Limpa a HTML
-		$('#pageGrid h3').remove();
-		$('#pageGrid section').remove();
-		
-		//Busca departamentos
-		// myDeparts = getDepartTable();
-		//Busca produtos
-		// myGrid    = getProdTable();
-		
-//////////////////////////////// TESTE - INICIO ////////////////////////////////
-		myGrid = [{
-			"id"   : "00001",
-			"name" : "Blusa de tricô",
-			"value": "30.00",
-			"size" : "Tamanho único",
-			"qtd"  : "5",
-			"img"  : "images/bluda-trico.jpg",
-			"dept" : "00001",
-		},
-		{
-			"id"   : "00002",
-			"name" : "Saia Longa com Cinto",
-			"value": "25.00",
-			"size" : "Tamanho M",
-			"qtd"  : "5",
-			"img"  : "images/saia-longa.jpg",
-			"dept" : "00002",
-		},
-		{
-			"id"   : "00003",
-			"name" : "Vestido de Moleton 3 em 1",
-			"value": "60.00",
-			"size" : "Tamanho M",
-			"qtd"  : "5",
-			"img"  : "images/vestido-moleton.jpg",
-			"dept" : "00003",
-		}];		
-		myDeparts = [{
-			"id"   : "00001",
-			"name" : "Blusas",
-		},
-		{
-			"id"   : "00002",
-			"name" : "Saias",
-		},
-		{
-			"id"   : "00003",
-			"name" : "Vestidos",
-		}];
-//////////////////////////////// TESTE - FIM ///////////////////////////////////	
-		
-		//Insere dados em tela
-		appendGridItens(myDeparts, myGrid);
-	};
-	
-	////// Maintaince //////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Exibe/Esconde tela de Login
-	toggleLogin = function() {
-		// Exibe a tela de login
-		$('#loginScreen').toggle();
-	};		
-	// Tenta realizar o login
-	logIn = function(){		
-		var email    = $('#inputEmail').val();
-		var password = $('#inputSenha').val();
-		
-		// Valida usuario
-		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			alert(errorMessage);
-		});		
-		toggleLogin();
-	};
-	// Recupera do formulario e atualiza o firebase
-	submitForm = function(action){
-		switch (action) {
-			case 'INS':
-				var newProd = getFormProduct();
-				setProduct(newProd);
-				break;
-			case 'DEL':
-				break;
-			case 'UPD':
-				break;
-		};
-	};
-	// Adiciona produto ao firebase
-	setProduct = function(newProd){
-		var refProd = firebase.database().ref('products/');
-		refProd.set(newProd);
-	};
-	// Recupera produtos cadastrados no firebase
-	getProdTable = function(){		
-		var refProd = firebase.database().ref('products');
-	};
-	// Recupera departamentos cadastrados no firebase	
-	getDepartTable = function() {		
-		if (myGrid === undefined){
-			alert('Não possui produtos');
-		};
-	};
-	// Remove produto do firebase
-	deleteProduct = function(){
-		// remove produto do firebase
+	tryLogin = function(){
+		var email = $('#inputEmail').val();
+		var password = $('#inputSenha').val();		
+		clLogin.logIn(email, password);	
 	};	
+
+    ////// Inicializando ///////////////////////////////////////////////////////////////////////////////////////////////////////	
+	clFirebase.init();	
+	clGrid.load();
+    clKart.toggle();
+	setImgForMapp("logo-compact.png", "logoImg");
 	
-
-	// Initialize Firebase
-	var config = {
-		apiKey: "AIzaSyAwm_buVA5z6szyeI1JjD_6zupg3vtIbJI",
-		authDomain: "moons-bazaar.firebaseapp.com",
-		databaseURL: "https://moons-bazaar.firebaseio.com",
-		projectId: "moons-bazaar",
-		storageBucket: "moons-bazaar.appspot.com",
-		messagingSenderId: "281206407475"
-	};
-	firebase.initializeApp(config);
-
-
-	////// Inicializando ///////////////////////////////////////////////////////////////////////////////////////////////////////	
-	onInit();	
-	
-});
+}); // end-$(document).ready
